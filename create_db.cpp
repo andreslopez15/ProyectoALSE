@@ -12,6 +12,7 @@ int main(int argc, char* argv[]) {
    int rc;
    string sqlstr;
 
+
    /* Open database */
    rc = sqlite3_open("test.db", &db);
    
@@ -24,31 +25,32 @@ int main(int argc, char* argv[]) {
 
    /* Create SQL statement */
    sqlstr = "CREATE TABLE IF NOT EXISTS usuario (id_usuario INTEGER PRIMARY KEY NOT NULL, "
-            "Nombre TEXT NOT NULL, Apellido TEXT NOT NULL, user_name TEXT NOT NULL, passwd TEXT NOT NULL);";
+            "Nombre TEXT NOT NULL, Apellido TEXT NOT NULL, user_name TEXT NOT NULL, passwd TEXT NOT NULL, UNIQUE(user_name, passwd));";
    CREAR_TABLA(sqlstr,db);
+
    /* Create SQL statement */
    sqlstr = "CREATE TABLE sensor_temperatura (id_medida INTEGER PRIMARY KEY NOT NULL," \
       "Temperatura REAL NOT NULL, Humedad REAL NOT NULL," \
       "Fecha TEXT NOT NULL );";
-    CREAR_TABLA(sqlstr,db);
+   CREAR_TABLA(sqlstr,db);
 
    /* Create SQL statement */
-   sqlstr = "CREATE TABLE sensor_viento (id_medida INTEGER PRIMARY KEY NOT NULL," \
+   sqlstr = "CREATE TABLE  sensor_viento (id_medida INTEGER PRIMARY KEY NOT NULL," \
        "Direccion_del_viento REAL NOT NULL, Velocidad REAL NOT NULL," \
        "Fecha TEXT NOT NULL );";
-     CREAR_TABLA(sqlstr,db);
+   CREAR_TABLA(sqlstr,db);
 
    /* Create SQL statement */
    sqlstr = "CREATE TABLE sensor_intensidad_de_luz (id_medida INTEGER PRIMARY KEY NOT NULL," \
         "Intensidad_de_luz REAL NOT NULL," \
         "Fecha TEXT NOT NULL );";
-      CREAR_TABLA(sqlstr,db);
+   CREAR_TABLA(sqlstr,db);
 
    /* Create SQL statement */
-   sqlstr = "CREATE TABLE sensor_precipitacion (id_medida INTEGER PRIMARY KEY NOT NULL," \
+   sqlstr = "CREATE TABLE  sensor_precipitacion (id_medida INTEGER PRIMARY KEY NOT NULL," \
          "Precipitacion REAL NOT NULL," \
          "Fecha TEXT NOT NULL );";
-       CREAR_TABLA(sqlstr,db);
+   CREAR_TABLA(sqlstr,db);
 
    sqlite3_close(db);
    return 0;
