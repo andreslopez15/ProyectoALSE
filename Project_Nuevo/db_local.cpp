@@ -24,7 +24,7 @@ bool DB_Local::abrir_DB(){
 
     /* Create SQL statement */
     sqlstr = "CREATE TABLE IF NOT EXISTS usuario (`id_usuario` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-             "`Nombre` TEXT NOT NULL, `Apellido` TEXT NOT NULL, `Documento` TEXT NOT NULL,`fecha` TEXT NOT NULL,  `user_name` TEXT NOT NULL, `passwd` TEXT NOT NULL, UNIQUE(user_name, passwd));";
+             "`Nombre` TEXT NOT NULL, `Apellido` TEXT NOT NULL, `user_name` TEXT NOT NULL, `passwd` TEXT NOT NULL, UNIQUE(user_name, passwd));";
              CREAR_TABLA(sqlstr);
 
     /* Create SQL statement */
@@ -87,14 +87,13 @@ bool DB_Local::guardarmedicion(std::string Tipo_sensor, double min, double prom,
     std::stringstream sqlsentence;
 
     sqlsentence << "INSERT INTO mediciones ('Tipo_sensor', 'maximo', 'minimo', 'promedio') VALUES (";
-    sqlsentence << "'" << Tipo_sensor << "', " << max << " , " << min << ", " << prom<<");" ;
+    sqlsentence << Tipo_sensor << ", " << max << ", " << min << ", " << prom<<");" ;
 
     rc = sqlite3_exec( _db, sqlsentence.str().c_str(), 0, 0, &mesg );
 
-    if (rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", mesg);
+    if (rc != SQLITE_OK )
         return false;
-    }
+
     return true;
 }
 
@@ -105,7 +104,8 @@ bool DB_Local::recuperarmedicion( std::string &Tipo_sensor, double &min, double 
     double tmp[3] = {0., 0., 0.}; // En este vector se traen los datos de la callback function.
 
     std::stringstream sql;
-    sql << "SELECT  maximo, minimo, promedio FROM mediciones WHERE id_medicion = (SELECT MAX(id_medicion) FROM mediciones WHERE Tipo_sensor = '" << Tipo_sensor << "')";
+    sql << "SELECT min, prom, max FROM TBL_TyH WHERE id_dato = (SELECT MAX(id_dato) FROM TBL_TyH);";
+
     rc = sqlite3_exec( _db, sql.str().c_str(), rellenar, (void*)&tmp, &mesg );
 
     if (rc != SQLITE_OK )
@@ -119,54 +119,6 @@ bool DB_Local::recuperarmedicion( std::string &Tipo_sensor, double &min, double 
 
     return true;
 
-}
-
-bool DB_Local::registro_usuario(std::string nombre, std::string apellido, std::string documento, std::string fecha, std::string user_name, std::string psswd){
-    char *mesg = 0;
-    int rc = 0;
-    std::stringstream sqlsentence;
-
-    sqlsentence << "INSERT INTO usuario ('Nombre', 'Apellido','Documento', 'fecha', 'user_name', 'passwd') VALUES (";
-    sqlsentence << "'" << nombre << "','" << apellido << "' , '" << documento << "', '" << fecha <<"', '" << user_name <<"', '" << psswd <<"');" ;
-
-    rc = sqlite3_exec( _db, sqlsentence.str().c_str(), 0, 0, &mesg );
-
-    if (rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", mesg);
-        return false;
-    }
-    return true;
-
-}
-
-bool DB_Local::recuperar_usuario(std::string &nombre, std::string &apellido, std::string &documento, std::string &fecha, std::string &user_name, std::string &psswd){
-    char *mesg = 0;
-    int rc = 0;
-
-    char tmp[6][50]; // En este vector se traen los datos de la callback function.
-
-    std::stringstream sql;
-    sql << "SELECT  Nombre, Apellido, Documento, fecha, user_name, passwd FROM usuario WHERE  user_name = '" << user_name << "';";
-    rc = sqlite3_exec( _db, sql.str().c_str(), rellenar, (void*)&tmp, &mesg );
-
-    if (rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", mesg);
-        return false;
-    }
-
-    std::cout <<"llego psswd"<< std::endl;
-    std::cout <<tmp[5]<< std::endl;
-    std::cout <<"llego psswd11"<< std::endl;
-
-    nombre = tmp[0];
-    apellido = tmp[1];
-    documento = tmp[2];
-    fecha = tmp[3];
-    user_name = tmp[4];
-    psswd = tmp[5];
-
-
-    return true;
 }
 
 DB_Local::DB_Local(){
