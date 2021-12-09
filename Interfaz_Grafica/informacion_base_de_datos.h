@@ -15,6 +15,9 @@ public:
     explicit Informacion_base_de_datos(QWidget *parent = nullptr);
     ~Informacion_base_de_datos();
 
+private slots:
+    void on_Recuperar_medida_clicked();
+
 private:
     Ui::Informacion_base_de_datos *ui;
 };

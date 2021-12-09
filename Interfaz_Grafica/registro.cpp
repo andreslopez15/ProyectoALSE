@@ -18,7 +18,7 @@ Registro::~Registro()
 
 void Registro::on_RegistrarBtn_clicked()
 {
-    std::string NombreTxt, ApellidoTxt, DocumentoTxt, ContraseniaTxt, ConfirmaContraseniaTxt, FechaEdit, UsuarioTxt;
+     std::string NombreTxt, ApellidoTxt, DocumentoTxt, ContraseniaTxt, ConfirmaContraseniaTxt, FechaEdit, UsuarioTxt;
      NombreTxt = ui -> NombreTxt -> text().toStdString();
      ApellidoTxt = ui -> ApellidoTxt -> text().toStdString();
      ContraseniaTxt = ui -> ContraseniaTxt -> text().toStdString();

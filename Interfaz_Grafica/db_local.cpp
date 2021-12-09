@@ -31,6 +31,12 @@ bool DB_Local::abrir_DB(){
     sqlstr = "CREATE TABLE IF NOT EXISTS mediciones (`id_medicion` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
              "`Tipo_sensor` TEXT NOT NULL, `maximo` REAL NOT NULL, `minimo` REAL NOT NULL, `promedio` REAL NOT NULL);";
              CREAR_TABLA(sqlstr);
+
+    /* Create SQL statement */
+    sqlstr = "CREATE TABLE IF NOT EXISTS alerta_temprana (`id_alerta` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+              "`fecha` TEXT NOT NULL, `temperatura` REAL NOT NULL, `humedad` REAL NOT NULL);";
+              CREAR_TABLA(sqlstr);
+
     if( rc != SQLITE_OK)
        return(false);
 
@@ -98,7 +104,7 @@ bool DB_Local::guardarmedicion(std::string Tipo_sensor, double min, double prom,
     return true;
 }
 
-bool DB_Local::recuperarmedicion( std::string &Tipo_sensor, double &min, double &prom, double &max){
+bool DB_Local::recuperarmedicion( std::string Tipo_sensor, double &min, double &prom, double &max){
     char *mesg = 0;
     int rc = 0;
 
@@ -113,9 +119,9 @@ bool DB_Local::recuperarmedicion( std::string &Tipo_sensor, double &min, double 
 
     // Había olvidado hacer las asignaciones del vector local a los parámetros de la función
     // que has sido pasados por parámetro para devolver la información a la función que la llamó
-    min = tmp[0];
-    prom = tmp[1];
-    max = tmp[2];
+    max = tmp[0];
+    min = tmp[1];
+    prom = tmp[2];
 
     return true;
 
@@ -188,3 +194,70 @@ int DB_Local::rellenar_string(void *data, int argc, char *argv[], char *campos[]
 
     return 0;
 }
+
+bool  DB_Local::alerta_guardar( double temperatura, double humedad){
+    char *mesg = 0;
+    int rc = 0;
+    std::stringstream sqlsentence;
+
+    sqlsentence << "INSERT INTO alerta_temprana ('fecha', 'temperatura', 'humedad') VALUES (";
+    sqlsentence << " DATE('now'), " << temperatura << " , " << humedad << ");" ;
+
+    rc = sqlite3_exec( _db, sqlsentence.str().c_str(), 0, 0, &mesg );
+
+    if (rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", mesg);
+        return false;
+    }
+    return true;
+}
+
+int DB_Local::alerta_recuperar(std::string fechahoy,double &temperaturahoy, double &humedadhoy,std::string fechaayer,double &temperaturaayer, double &humedadayer){
+    char *mesg = 0;
+    int rc = 0;
+
+    std::string tmp[3]; // En este vector se traen los datos de la callback function.
+
+    std::stringstream sql;
+    sql << "SELECT * FROM alerta_temprana WHERE fecha = date('now','-1 day');";
+    rc = sqlite3_exec( _db, sql.str().c_str(), rellenar_string, (void*)&tmp, &mesg );
+
+    if (rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", mesg);
+        return -1;
+    }
+
+    fechaayer = tmp[0];
+    temperaturaayer = atof(tmp[1].c_str());
+    humedadayer = atof(tmp[2].c_str());
+
+    sql << "SELECT * FROM alerta_temprana WHERE fecha = date('now');";
+    rc = sqlite3_exec( _db, sql.str().c_str(), rellenar_string, (void*)&tmp, &mesg );
+
+    if (rc != SQLITE_OK ){
+        fprintf(stderr, "SQL error: %s\n", mesg);
+        return -1;
+    }
+
+
+    fechahoy = tmp[0];
+    temperaturahoy = atof(tmp[1].c_str());
+    humedadhoy = atof(tmp[2].c_str());
+
+
+    if(fechaayer != "" && fechahoy != ""){
+            return 2; //Alerta roja
+    }
+
+    if(fechaayer != "" || fechahoy != ""){
+        return 1; //Alerta amarilla
+    }
+
+    return 0; //Alerta verde
+}
+
+
+
+
+
+

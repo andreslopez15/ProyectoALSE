@@ -1,0 +1,3 @@
+/home/manuela/Documents/ProyectoALSE/Project_Nuevo/CMakeFiles/rebuild_cache.dir
+/home/manuela/Documents/ProyectoALSE/Project_Nuevo/CMakeFiles/edit_cache.dir
+/home/manuela/Documents/ProyectoALSE/Project_Nuevo/CMakeFiles/Proyecto_F.dir
