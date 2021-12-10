@@ -1,0 +1,4 @@
+/home/manuela/Downloads/Proyecto/Interfaz_Grafica/CMakeFiles/rebuild_cache.dir
+/home/manuela/Downloads/Proyecto/Interfaz_Grafica/CMakeFiles/edit_cache.dir
+/home/manuela/Downloads/Proyecto/Interfaz_Grafica/CMakeFiles/Interfaz_Grafica.dir
+/home/manuela/Downloads/Proyecto/Interfaz_Grafica/CMakeFiles/Interfaz_Grafica_autogen.dir
