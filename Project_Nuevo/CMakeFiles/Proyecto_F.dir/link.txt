@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/Proyecto_F.dir/main.cpp.o CMakeFiles/Proyecto_F.dir/db_local.cpp.o  -o Proyecto_F  -lsqlite3 
