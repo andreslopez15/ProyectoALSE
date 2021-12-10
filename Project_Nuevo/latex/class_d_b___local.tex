@@ -1,0 +1,225 @@
+\hypertarget{class_d_b___local}{}\doxysection{D\+B\+\_\+\+Local Class Reference}
+\label{class_d_b___local}\index{DB\_Local@{DB\_Local}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_d_b___local_aa58821265cca380dd6bd3428b77f2fc0}\label{class_d_b___local_aa58821265cca380dd6bd3428b77f2fc0}} 
+{\bfseries D\+B\+\_\+\+Local} (std\+::string path)
+\item 
+\mbox{\Hypertarget{class_d_b___local_ad4774fcd9bc921c00c7e70320855a049}\label{class_d_b___local_ad4774fcd9bc921c00c7e70320855a049}} 
+int {\bfseries C\+R\+E\+A\+R\+\_\+\+T\+A\+B\+LA} (std\+::string sqlstr)
+\item 
+\mbox{\Hypertarget{class_d_b___local_a6cc40f351a1ef4e34f0364fd7d075dab}\label{class_d_b___local_a6cc40f351a1ef4e34f0364fd7d075dab}} 
+bool {\bfseries Guardar\+\_\+datos\+\_\+sensores} (double temperatura, double humedad, double direccion\+\_\+del\+\_\+viento, double precipitacion, double velocidad\+\_\+del\+\_\+viento, double intensidad\+\_\+de\+\_\+la\+\_\+luz)
+\item 
+bool \mbox{\hyperlink{class_d_b___local_a38a474e907a69cc6686d85a2d76ea93d}{abrir\+\_\+\+DB}} ()
+\begin{DoxyCompactList}\small\item\em rutina para abrir la conexion de la db y crear las tablas en caso de que no exista \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_d_b___local_a3164e212150490747e02f4dabb3fb432}\label{class_d_b___local_a3164e212150490747e02f4dabb3fb432}} 
+bool {\bfseries cerrar\+\_\+\+DB} ()
+\item 
+bool \mbox{\hyperlink{class_d_b___local_a67cefd3e280c39211ad8f2e4e431a277}{guardarmedicion}} (std\+::string Tipo\+\_\+sensor, double min, double prom, double max)
+\begin{DoxyCompactList}\small\item\em rutina para guardar minimo, maximo y promedio de las mediciones \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b___local_a3186d3bba51afc8af2f6f2590ae10e4b}{recuperarmedicion}} (std\+::string Tipo\+\_\+sensor, double \&min, double \&prom, double \&max)
+\begin{DoxyCompactList}\small\item\em rutina para recuperar los valores de minimo, maximo y promedio de las mediciones mas recientes \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b___local_ad680dc9221771716a9799afd4a733d19}{registro\+\_\+usuario}} (std\+::string nombre, std\+::string apellido, std\+::string documento, std\+::string fecha, std\+::string user\+\_\+name, std\+::string psswd)
+\begin{DoxyCompactList}\small\item\em rutina para el proceso de registro del usuario \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b___local_adee275921f5cef2f0936b6a126999679}{recuperar\+\_\+usuario}} (std\+::string \&nombre, std\+::string \&apellido, std\+::string \&documento, std\+::string \&fecha, std\+::string \&user\+\_\+name, std\+::string \&psswd)
+\begin{DoxyCompactList}\small\item\em rutina para recuperar los datos que registro el usuario \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b___local_a28c99b68374e82916593925c2e54e229}{guardar\+\_\+usuariorg}} (std\+::string nombre)
+\begin{DoxyCompactList}\small\item\em rutina para reconocer la fecha y hora exacta de registro del usuario a la aplicación \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b___local_a18f0c9a4d219d6eb91318d7a94a15cab}{alerta\+\_\+guardar}} (double temperatura, double humedad)
+\begin{DoxyCompactList}\small\item\em rutina para guardar una detección de alerta en la papa \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_d_b___local_a2e8df1e90cbb13127395838913aede9a}{alerta\+\_\+recuperar}} (std\+::string fechahoy, double \&temperaturahoy, double \&humedadhoy, std\+::string fechaayer, double \&temperaturaayer, double \&humedadayer)
+\begin{DoxyCompactList}\small\item\em rutina para recuperar una alerta de hongo en la papa sea del día de ayer o actual \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_d_b___local_a38a474e907a69cc6686d85a2d76ea93d}\label{class_d_b___local_a38a474e907a69cc6686d85a2d76ea93d}} 
+\index{DB\_Local@{DB\_Local}!abrir\_DB@{abrir\_DB}}
+\index{abrir\_DB@{abrir\_DB}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{abrir\_DB()}{abrir\_DB()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::abrir\+\_\+\+DB (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+rutina para abrir la conexion de la db y crear las tablas en caso de que no exista 
+
+\begin{DoxyReturn}{Returns}
+booleano que indica si la db se abrio con exito 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_a18f0c9a4d219d6eb91318d7a94a15cab}\label{class_d_b___local_a18f0c9a4d219d6eb91318d7a94a15cab}} 
+\index{DB\_Local@{DB\_Local}!alerta\_guardar@{alerta\_guardar}}
+\index{alerta\_guardar@{alerta\_guardar}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{alerta\_guardar()}{alerta\_guardar()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::alerta\+\_\+guardar (\begin{DoxyParamCaption}\item[{double}]{temperatura,  }\item[{double}]{humedad }\end{DoxyParamCaption})}
+
+
+
+rutina para guardar una detección de alerta en la papa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em temperatura} & es un double que indica la temperatura de la papa con el fin de detectar un hongo \\
+\hline
+{\em humedad} & es un double que indica la humedad de la papa con el fin de detectar un hongo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booleano que indica si el dato se guardo correctamente 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_a2e8df1e90cbb13127395838913aede9a}\label{class_d_b___local_a2e8df1e90cbb13127395838913aede9a}} 
+\index{DB\_Local@{DB\_Local}!alerta\_recuperar@{alerta\_recuperar}}
+\index{alerta\_recuperar@{alerta\_recuperar}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{alerta\_recuperar()}{alerta\_recuperar()}}
+{\footnotesize\ttfamily int D\+B\+\_\+\+Local\+::alerta\+\_\+recuperar (\begin{DoxyParamCaption}\item[{std\+::string}]{fechahoy,  }\item[{double \&}]{temperaturahoy,  }\item[{double \&}]{humedadhoy,  }\item[{std\+::string}]{fechaayer,  }\item[{double \&}]{temperaturaayer,  }\item[{double \&}]{humedadayer }\end{DoxyParamCaption})}
+
+
+
+rutina para recuperar una alerta de hongo en la papa sea del día de ayer o actual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fechahoy} & es un string que indica la fecha actual \\
+\hline
+{\em temperaturahoy} & es un double que indica la temperatura del presente día \\
+\hline
+{\em humedadhoy} & es un double que indica la humedad del presente día \\
+\hline
+{\em fechaayer} & es un string que indica la fecha de ayer \\
+\hline
+{\em temperaturaayer} & es un double que indica la temperatura del dia de ayer \\
+\hline
+{\em humedadayer} & es un double que indica la humedad del dia de ayer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booleano que indica si el dato se guardo correctamente 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_a28c99b68374e82916593925c2e54e229}\label{class_d_b___local_a28c99b68374e82916593925c2e54e229}} 
+\index{DB\_Local@{DB\_Local}!guardar\_usuariorg@{guardar\_usuariorg}}
+\index{guardar\_usuariorg@{guardar\_usuariorg}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{guardar\_usuariorg()}{guardar\_usuariorg()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::guardar\+\_\+usuariorg (\begin{DoxyParamCaption}\item[{std\+::string}]{nombre }\end{DoxyParamCaption})}
+
+
+
+rutina para reconocer la fecha y hora exacta de registro del usuario a la aplicación 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre} & es un string correspondiente al nombre guardado del usuario \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booleano que indica si el dato se guardo correctamente 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_a67cefd3e280c39211ad8f2e4e431a277}\label{class_d_b___local_a67cefd3e280c39211ad8f2e4e431a277}} 
+\index{DB\_Local@{DB\_Local}!guardarmedicion@{guardarmedicion}}
+\index{guardarmedicion@{guardarmedicion}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{guardarmedicion()}{guardarmedicion()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::guardarmedicion (\begin{DoxyParamCaption}\item[{std\+::string}]{Tipo\+\_\+sensor,  }\item[{double}]{min,  }\item[{double}]{prom,  }\item[{double}]{max }\end{DoxyParamCaption})}
+
+
+
+rutina para guardar minimo, maximo y promedio de las mediciones 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tipo\+\_\+sensor} & es un string que indica el tipo de sensor (ej\+: temperatura, humedad, precipitacion, etc) \\
+\hline
+{\em min} & es un double con el minimo valor tomado durante cada minuto de los sensores \\
+\hline
+{\em prom} & es un double con el promedio tomado durante cada minuto de los sensores \\
+\hline
+{\em max} & es un double con el maximo valor tomado durante cada minuto de los sensores \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booleano que indica si el dato se guardo con exito 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_adee275921f5cef2f0936b6a126999679}\label{class_d_b___local_adee275921f5cef2f0936b6a126999679}} 
+\index{DB\_Local@{DB\_Local}!recuperar\_usuario@{recuperar\_usuario}}
+\index{recuperar\_usuario@{recuperar\_usuario}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{recuperar\_usuario()}{recuperar\_usuario()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::recuperar\+\_\+usuario (\begin{DoxyParamCaption}\item[{std\+::string \&}]{nombre,  }\item[{std\+::string \&}]{apellido,  }\item[{std\+::string \&}]{documento,  }\item[{std\+::string \&}]{fecha,  }\item[{std\+::string \&}]{user\+\_\+name,  }\item[{std\+::string \&}]{psswd }\end{DoxyParamCaption})}
+
+
+
+rutina para recuperar los datos que registro el usuario 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre} & es una string con referencia correspondiente al nombre \\
+\hline
+{\em apellido} & es una string con referencia correspondiente al apellido \\
+\hline
+{\em documento} & es una string con referencia correspondiente al documento de identidad \\
+\hline
+{\em fecha} & es una string con referencia correspondiente a la fecha de registro del usuario \\
+\hline
+{\em user\+\_\+name} & es una string con referencia correspondiente al nombre de usuario \\
+\hline
+{\em psswd} & es una string con referencia correspondiente a la contraseña introducida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_a3186d3bba51afc8af2f6f2590ae10e4b}\label{class_d_b___local_a3186d3bba51afc8af2f6f2590ae10e4b}} 
+\index{DB\_Local@{DB\_Local}!recuperarmedicion@{recuperarmedicion}}
+\index{recuperarmedicion@{recuperarmedicion}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{recuperarmedicion()}{recuperarmedicion()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::recuperarmedicion (\begin{DoxyParamCaption}\item[{std\+::string}]{Tipo\+\_\+sensor,  }\item[{double \&}]{min,  }\item[{double \&}]{prom,  }\item[{double \&}]{max }\end{DoxyParamCaption})}
+
+
+
+rutina para recuperar los valores de minimo, maximo y promedio de las mediciones mas recientes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tipo\+\_\+sensor} & es un string que indica el tipo de sensor(ej\+: temperatura, humedad, precipitacion, etc) \\
+\hline
+{\em min} & es una variable double por referencia con el minimo valor tomado durante cada minuto de los sensores \\
+\hline
+{\em prom} & es una variable double por referencia con el promedio tomado durante cada minuto de los sensores \\
+\hline
+{\em max} & es una variable double por referencia con el maximo valor tomado durante cada minuto de los sensores \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booleano que indica si el dato se guardo correctamente 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_d_b___local_ad680dc9221771716a9799afd4a733d19}\label{class_d_b___local_ad680dc9221771716a9799afd4a733d19}} 
+\index{DB\_Local@{DB\_Local}!registro\_usuario@{registro\_usuario}}
+\index{registro\_usuario@{registro\_usuario}!DB\_Local@{DB\_Local}}
+\doxysubsubsection{\texorpdfstring{registro\_usuario()}{registro\_usuario()}}
+{\footnotesize\ttfamily bool D\+B\+\_\+\+Local\+::registro\+\_\+usuario (\begin{DoxyParamCaption}\item[{std\+::string}]{nombre,  }\item[{std\+::string}]{apellido,  }\item[{std\+::string}]{documento,  }\item[{std\+::string}]{fecha,  }\item[{std\+::string}]{user\+\_\+name,  }\item[{std\+::string}]{psswd }\end{DoxyParamCaption})}
+
+
+
+rutina para el proceso de registro del usuario 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nombre} & es un string correspondiente al nombre real del usuario \\
+\hline
+{\em apellido} & es un string correspondiente al apellido real del usuario \\
+\hline
+{\em documento} & es un string correspondiente al documento de identidad del usuario \\
+\hline
+{\em fecha} & es un string correspondiente a la fecha de nacimiento del usuario \\
+\hline
+{\em user\+\_\+name} & es un string correspondiente al nombre con el cual se quiere registrar el usuario en la aplicación \\
+\hline
+{\em psswd} & es un string necesario para poder tener acceso a la aplicación \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+booleano que indica si el dato se guardo correctamente 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+db\+\_\+local.\+h\item 
+db\+\_\+local.\+cpp\end{DoxyCompactItemize}
